@@ -5,9 +5,9 @@ import (
 	"crypto/tls"
 	"log"
 
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/v2/bson"
+	"go.mongodb.org/mongo-driver/v2/mongo"
+	"go.mongodb.org/mongo-driver/v2/mongo/options"
 )
 
 type MongoDBOrderRepo struct {
@@ -32,7 +32,7 @@ func NewMongoDBOrderRepo(mongoUri string, mongoDb string, mongoCollection string
 			SetTLSConfig(&tls.Config{InsecureSkipVerify: false})
 	}
 
-	mongoClient, err := mongo.Connect(ctx, clientOptions)
+	mongoClient, err := mongo.Connect(clientOptions)
 	if err != nil {
 		log.Printf("failed to connect to mongodb: %s", err)
 		return nil, err
